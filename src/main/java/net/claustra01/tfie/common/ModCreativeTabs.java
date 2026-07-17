@@ -17,10 +17,18 @@ public final class ModCreativeTabs {
         .icon(() -> new ItemStack(ModItems.TREATED_WOOD_LUMBER.get()))
         .displayItems((parameters, output) -> {
             output.accept(ModItems.TREATED_WOOD_LUMBER.get());
+            output.accept(ModItems.WIRECUTTER_HEAD.get());
+            output.accept(ModItems.HAMMER_HEAD.get());
+            output.accept(ModItems.MOLD_SHEET.get());
+            output.accept(ModItems.MOLD_BLOCK.get());
             output.accept(ModBlocks.WILD_HEMP.get());
         })
         .build()), (parameters, output) -> {
             output.accept(ModItems.TREATED_WOOD_LUMBER.get());
+            output.accept(ModItems.WIRECUTTER_HEAD.get());
+            output.accept(ModItems.HAMMER_HEAD.get());
+            output.accept(ModItems.MOLD_SHEET.get());
+            output.accept(ModItems.MOLD_BLOCK.get());
             output.accept(ModBlocks.WILD_HEMP.get());
         });
 

@@ -1,83 +1,93 @@
 # AGENTS.md
 
-## Project overview
+## プロジェクト概要
 
-TFIE is a small NeoForge compatibility addon between TerraFirmaCraft (TFC)
-and Immersive Engineering (IE) for Minecraft 1.21.1.
+TFIEは、Minecraft 1.21.1向けのTerraFirmaCraft（TFC）と
+Immersive Engineering（IE）の小規模なNeoForge連携アドオンである。
 
-Keep the addon focused. Add only the integration needed by the requested
-feature; do not copy unrelated systems from the reference project.
-
-The main reference implementation is:
+要求された連携要素だけを実装し、参照元にある無関係な機能は移植しない。
+主な参照実装は次のリポジトリとする。
 
 - https://github.com/NMagpie/TFC-IE-Crossover/tree/1.21.x
 
-Code or assets adapted from that project must retain the MIT attribution in
-`THIRD_PARTY_NOTICES.md`, and the notice must remain included in the built JAR.
+参照元からコードやアセットを移植・改変した場合は、
+`THIRD_PARTY_NOTICES.md`のMITライセンス表示を維持する。ビルドしたJARにも
+この通知を必ず含める。
 
-## Build and validation
+## このファイルの管理
 
-- Use Java 21.
-- Validate changes with `./gradlew build`.
-- Do not launch a client or server (`runClient`, `runServer`, or equivalent)
-  unless the user explicitly asks for it.
-- Do not run data generation unless a change specifically requires it.
-- Before handing off, run `git diff --check` in addition to the build.
-- Do not commit generated `build/`, `run/`, IDE, or Gradle cache files.
+- `AGENTS.md`は常にプロジェクトの最新状態と一致させる。
+- パッケージ、依存関係、ディレクトリ構成、実装方針、検証方法を変更した場合は、
+  同じ作業内でこのファイルも更新する。
+- 新しい恒常的な実装上の注意点が判明した場合も、このファイルへ反映する。
+- `README.md`へ機能一覧や作業履歴を継ぎ足さない。
+- ユーザーから明示的に依頼されない限り、`README.md`は変更しない。
 
-## Dependencies
+## ビルドと検証
 
-- NeoForge, Minecraft, TFC, IE, and Patchouli versions are defined in
-  `gradle.properties`.
-- Keep mod dependency declarations in
-  `src/main/templates/META-INF/neoforge.mods.toml` synchronized with Gradle.
-- Prefer the same TFC and IE versions used by the 1.21.x reference unless the
-  user requests an upgrade.
-- Do not add optional content mods merely because the reference project uses
-  them.
+- Java 21を使用する。
+- 実装変更の検証には`./gradlew build`を使用する。
+- ユーザーから明示的に依頼されない限り、`runClient`、`runServer`などで
+  クライアントやサーバーを起動しない。
+- 明確な必要性がない限り、データ生成を実行しない。
+- 作業完了前に`git diff --check`を実行する。
+- `build/`、`run/`、IDE設定、Gradleキャッシュなどの生成物をコミットしない。
 
-## Source layout
+## 依存関係
 
-- Java package: `net.claustra01.tfie`
-- Mod ID and resource namespace: `tfie`
-- Main mod class: `src/main/java/net/claustra01/tfie/TFIE.java`
-- Registrations and integrations: `src/main/java/net/claustra01/tfie/common/`
-- Assets: `src/main/resources/assets/tfie/`
-- Data pack resources: `src/main/resources/data/`
+- NeoForge、Minecraft、TFC、IE、Patchouliのバージョンは
+  `gradle.properties`で管理する。
+- mod依存関係は`src/main/templates/META-INF/neoforge.mods.toml`とGradleの
+  設定で同期させる。
+- ユーザーからアップグレードを依頼されない限り、参照元の1.21.xブランチと
+  同じTFCおよびIEバージョンを優先する。
+- 参照元が使用しているという理由だけで、Firmalifeなどの任意modを追加しない。
 
-Keep registration classes small and grouped by registry responsibility. Use
-NeoForge deferred registration and TFC registration helpers where TFC block or
-block-entity behavior requires them.
+## ソース構成
 
-## TFC and IE integration rules
+- Javaパッケージ: `net.claustra01.tfie`
+- mod IDおよびリソース名前空間: `tfie`
+- author: `claustra01`
+- メインクラス: `src/main/java/net/claustra01/tfie/TFIE.java`
+- 共通登録・連携処理: `src/main/java/net/claustra01/tfie/common/`
+- クライアント専用処理: `src/main/java/net/claustra01/tfie/client/`
+- アセット: `src/main/resources/assets/tfie/`
+- データパック: `src/main/resources/data/`
 
-- Reuse IE items, fluids, textures, and outputs when the integration represents
-  an IE concept; do not register duplicate hemp seeds or fibers.
-- Use TFC crop classes, climate ranges, nutrients, loot functions, tags, and
-  interaction registration for crops intended to behave as TFC crops.
-- Every custom TFC crop must have all required block variants, block entity
-  support, climate data, loot tables, block tags, models, blockstates, and
-  translations.
-- Any fluid consumed by a TFC barrel recipe must be added to the appropriate
-  TFC usability tags.
-- If a compatibility recipe replaces an IE recipe, override the original
-  recipe ID deliberately so the IE recipe cannot bypass the TFC progression.
-- Use singular Minecraft 1.21 data directories such as `recipe/` and
-  `loot_table/`.
+登録クラスはレジストリの責務ごとに小さく保つ。NeoForgeのDeferred Registerと、
+必要に応じてTFCの登録ヘルパーを使用する。
 
-## Resources and localization
+## TFC・IE連携規約
 
-- Provide only `en_us` translations for player-visible TFIE content unless the
-  user explicitly requests another locale.
-- Use existing TFC/IE models and textures where appropriate.
-- Keep JSON readable and ensure all identifiers use the correct namespace.
-- World-generation additions must be appended with tags using
-  `"replace": false`.
+- IE由来の概念には既存のIEアイテム、液体、テクスチャ、出力を再利用する。
+  hemp seedやhemp fiberなどを重複登録しない。
+- TFC作物として動作させる作物には、TFCの作物クラス、気候範囲、栄養、
+  loot function、タグ、interaction登録を使用する。
+- 独自TFC作物には、必要な全ブロック形態、block entity、気候データ、
+  loot table、block tag、model、blockstate、翻訳を揃える。
+- 透過テクスチャを使う作物ブロックは、クライアント側で`RenderType.cutout()`へ
+  登録する。
+- TFC barrelレシピで使用する液体は、対応するTFC usability tagへ追加する。
+- 連携レシピでIE標準レシピを置き換える場合は、同じrecipe IDを明示的に
+  上書きし、TFC進行を迂回できないようにする。
+- Minecraft 1.21のデータディレクトリ名は`recipe/`、`loot_table/`のように
+  単数形を使用する。
+- Metal Pressの独自moldはスタック数を1とし、mold tagとTFC item sizeを定義する。
+- TFC金属向けMetal Pressレシピでは、対象金属にTFC側の出力アイテムが実在する
+  ことを確認する。未実装の独自IE金属や任意modの金属は追加しない。
 
-## Scope safety
+## リソースと翻訳
 
-- Preserve unrelated user changes in the worktree.
-- Do not change recipes, progression, world generation, or balance beyond the
-  feature requested by the user.
-- Avoid introducing configs, mixins, networking, or client-only code unless a
-  concrete feature needs them.
+- プレイヤーに表示されるTFIEコンテンツには`en_us`のみを用意する。
+  別ロケールはユーザーから明示的に依頼された場合だけ追加する。
+- 適切な既存TFC・IE modelおよびtextureを再利用する。
+- JSONは読みやすく保ち、すべてのIDで正しい名前空間を使用する。
+- world generation用タグへの追加では`"replace": false`を指定する。
+
+## 作業範囲と安全性
+
+- worktreeにある無関係なユーザー変更を保持する。
+- ユーザーが要求した機能を超えてrecipe、進行、world generation、バランスを
+  変更しない。
+- 具体的な機能上の必要がない限り、config、mixin、networking、client専用処理を
+  追加しない。

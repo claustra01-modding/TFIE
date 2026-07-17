@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "energy": 2400,
+  "input": {
+    "basePredicate": {
+      "tag": "c:ingots/uranium"
+    },
+    "count": 9
+  },
+  "mold": "tfie:mold_block",
+  "result": {
+    "id": "immersiveengineering:storage_uranium"
+  }
+}

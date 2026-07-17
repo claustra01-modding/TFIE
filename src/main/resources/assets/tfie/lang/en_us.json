@@ -3,5 +3,9 @@
   "block.tfie.dead_crop.hemp": "Dead Hemp",
   "block.tfie.wild_crop.hemp": "Wild Hemp",
   "item.tfie.treated_wood_lumber": "Treated Wood Lumber",
+  "item.tfie.tool_head.wirecutter": "Wirecutter Head",
+  "item.tfie.tool_head.ie_hammer": "Engineer's Hammer Head",
+  "item.tfie.mold_sheet": "Metal Press Mold: Sheet",
+  "item.tfie.mold_block": "Metal Press Mold: Block",
   "tfie.creative_tab.main": "TFIE"
 }

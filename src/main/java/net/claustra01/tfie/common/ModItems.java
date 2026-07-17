@@ -12,6 +12,18 @@ public final class ModItems {
     public static final ItemId TREATED_WOOD_LUMBER = new ItemId(
         ITEMS.register("treated_wood_lumber", () -> new Item(new Item.Properties()))
     );
+    public static final ItemId WIRECUTTER_HEAD = new ItemId(
+        ITEMS.register("tool_head/wirecutter", () -> new Item(new Item.Properties()))
+    );
+    public static final ItemId HAMMER_HEAD = new ItemId(
+        ITEMS.register("tool_head/ie_hammer", () -> new Item(new Item.Properties()))
+    );
+    public static final ItemId MOLD_SHEET = new ItemId(
+        ITEMS.register("mold_sheet", () -> new Item(new Item.Properties().stacksTo(1)))
+    );
+    public static final ItemId MOLD_BLOCK = new ItemId(
+        ITEMS.register("mold_block", () -> new Item(new Item.Properties().stacksTo(1)))
+    );
 
     private ModItems() {}
 }

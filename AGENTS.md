@@ -35,7 +35,7 @@ Immersive Engineering（IE）のNeoForge連携アドオンである。
 
 ## 依存関係
 
-- NeoForge、Minecraft、TFC、IE、Patchouliのバージョンは
+- NeoForge、Minecraft、TFC、IE、Advanced TFC Tech、Patchouliのバージョンは
   `gradle.properties`で管理する。
 - IE Garden ClocheのTFC二段作物描画にはDualCodecs 0.1.2を使用し、
   `jarJar`で成果物へ同梱する。
@@ -43,6 +43,8 @@ Immersive Engineering（IE）のNeoForge連携アドオンである。
   設定で同期させる。
 - ユーザーからアップグレードを依頼されない限り、参照元の1.21.xブランチと
   同じTFCおよびIEバージョンを優先する。
+- Advanced TFC Tech Unofficial（mod ID `advancedtfctech`）3.2以降を必須依存とし、
+  TFIEは同modより後にロードする。
 - Firmalife（mod ID `firmalife`）とArborFirmaCraft（mod ID `afc`）は任意依存とし、
   対象データには必ず`neoforge:mod_loaded`条件を付ける。これらを必須依存にしない。
 - 任意modのJava APIへ直接依存せず、条件付きrecipeと既存IDによるデータ互換を
@@ -95,9 +97,12 @@ Immersive Engineering（IE）のNeoForge連携アドオンである。
   上書きし、TFC進行を迂回できないようにする。
 - 無効化用recipeは`tfie:empty` serializerと`neoforge:false`条件を使用する。
 - IEの通常crafting置換と、その置換先となるTFC anvil recipeを対で保つ。
-- Arc Furnaceのstructure NBTではTFC Fire BricksとTFC Steel Plated Blockを
-  直接使用する。Engineer’s Manualのmultiblock描画も同じstructureを参照させ、
-  実際の形成条件とGuide上の表示を一致させる。
+- Arc Furnaceのstructure NBTではTFC Fire Bricks、TFC Steel Plated Block、
+  TFC Crucibleを直接使用する。Engineer’s Manualのmultiblock描画も同じstructureを
+  参照させ、実際の形成条件とGuide上の表示を一致させる。
+- Advanced TFC TechのGrist MillとPower Loomでは、structure NBT内の
+  IE Steel Storage BlockをTFC Steel Plated Blockへ直接置換する。同modの
+  Engineer’s ManualとTFC Field Guideの描画も形成条件と一致させる。
 - TFCの加熱・鉱石処理工程を迂回させないため、IE標準のCrusherとArc Furnaceにある
   vanilla鉱石倍化recipeを同じIDで無効化する。対象は両機械の`ore_*`、
   `raw_ore_*`、`raw_block_*`に加え、Crusherの`nether_gold`とArc Furnaceの

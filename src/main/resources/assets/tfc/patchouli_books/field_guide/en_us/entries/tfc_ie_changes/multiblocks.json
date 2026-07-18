@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "To create the $(thing)Arc Furnace$(), use TFC $(thing)Fire Bricks$() instead of IE Blast Bricks and the TFC $(thing)Steel Plated Block$() as its steel storage block.$(br)You do not need IE's Blast Furnace or Alloy Kiln because TFC provides those processing paths."
+      "text": "To create the $(thing)Arc Furnace$(), use TFC $(thing)Fire Bricks$() instead of IE Blast Bricks, the TFC $(thing)Steel Plated Block$() as its steel storage block, and a TFC $(thing)Crucible$() instead of a Cauldron.$(br)You do not need IE's Blast Furnace or Alloy Kiln because TFC provides those processing paths."
     },
     {
       "type": "patchouli:crafting",
@@ -61,7 +61,7 @@
           "L": "immersiveengineering:light_engineering",
           "H": "immersiveengineering:heavy_engineering",
           "R": "immersiveengineering:rs_engineering",
-          "0": "minecraft:cauldron"
+          "0": "tfc:crucible"
         }
       },
       "name": "Arc Furnace",

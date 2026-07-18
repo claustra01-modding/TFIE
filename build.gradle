@@ -42,6 +42,10 @@ repositories {
         forRepository { maven { url = 'https://maven.blamejared.com' } }
         filter { includeGroup 'malte0811' }
     }
+    exclusiveContent {
+        forRepository { maven { url = 'https://api.modrinth.com/maven' } }
+        filter { includeGroup 'maven.modrinth' }
+    }
 }
 
 base {
@@ -134,6 +138,7 @@ configurations {
 dependencies {
     implementation group: 'curse.maven', name: 'terrafirmacraft-302973', version: '7452541'
     implementation "blusunrize.immersiveengineering:ImmersiveEngineering:${ie_version}"
+    implementation "maven.modrinth:advanced-tfc-tech-unofficial:${advanced_tfctech_version}"
     implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
     jarJar(implementation('malte0811:DualCodecs:0.1.2')) {
         version {
@@ -178,6 +183,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_version            : mod_version,
             tfc_version            : tfc_version,
             ie_version             : ie_version,
+            advanced_tfctech_version: advanced_tfctech_version,
     ]
     inputs.properties replaceProperties
     expand replaceProperties

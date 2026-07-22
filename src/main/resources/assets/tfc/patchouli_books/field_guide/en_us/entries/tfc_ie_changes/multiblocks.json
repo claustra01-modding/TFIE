@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "To create the $(thing)Arc Furnace$(), use TFC $(thing)Fire Bricks$() instead of IE Blast Bricks, the TFC $(thing)Steel Plated Block$() as its steel storage block, and a TFC $(thing)Crucible$() instead of a Cauldron.$(br)You do not need IE's Blast Furnace or Alloy Kiln because TFC provides those processing paths."
+      "text": "To create the $(thing)Arc Furnace$(), use TFC $(thing)Fire Bricks$() instead of IE Blast Bricks, the TFC $(thing)Black Steel Plated Block$() as its steel storage block, and a TFC $(thing)Crucible$() instead of a Cauldron.$(br)You do not need IE's Blast Furnace or Alloy Kiln because TFC provides those processing paths."
     },
     {
       "type": "patchouli:crafting",
@@ -54,7 +54,7 @@
         ],
         "mapping": {
           "S": "immersiveengineering:steel_scaffolding_standard",
-          "T": "tfc:metal/block/steel",
+          "T": "tfc:metal/block/black_steel",
           "M": "immersiveengineering:sheetmetal_steel",
           "m": "immersiveengineering:slab_sheetmetal_steel",
           "B": "tfc:fire_bricks",
